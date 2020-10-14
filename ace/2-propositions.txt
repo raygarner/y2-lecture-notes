@@ -1,0 +1,39 @@
+^   AND              conjunction
+v   OR               disjunction
+->  if-then          impolication
+¬   NOT              negation
+<-> if-and-only-if   equivalance
+false                pigs can fly
+true                 it sometimes rains in england
+:=                   tautology
+
+tautology            proposition that is always true
+
+to prove an implication, you have to assume the left hand side first
+
+
+theorem C : (P -> Q) -> (Q -> R) -> (P -> R) :=
+begin
+    assume f,
+    assume g,
+    assume p,
+    apply g,
+    apply f,
+    exact p,
+
+end
+
+
+-- lean notes
+
+\lam
+\and
+\or
+\->
+\<->
+\neg
+false
+true
+\in
+\all
+\ex

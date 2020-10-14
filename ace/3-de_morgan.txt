@@ -1,0 +1,15 @@
+to prove implication, assume the left side
+
+use 'assume' for negation too, because negation is just P -> false
+
+use 'constructor' for \and to split it into 2 goals
+
+use 'left' or 'right' for \or to reduce the goal to one side
+
+use 'constructor' to prove true because it is just an empty \and
+use 'cases' to prove fase because it is an empty \or
+
+conjunction = and
+disjunction = or
+
+em - excluded middle
