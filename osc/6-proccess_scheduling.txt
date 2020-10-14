@@ -1,0 +1,32 @@
+different scheduling algorithms can be used for the different queues
+
+feedback queues allow jobs to move between queues which are using different scheduling algorithms
+    move to lower priority queue is too much cpu time is used
+    move to higher priority queue to prevent starvation and avoid inversion of control
+
+
+
+Linux scheduling:
+    real time tasks (mainly kernel processes)
+        real time fifo tasks (first 500 priority tasks)
+        real time round robin tasks (rest of tasks)
+
+    time sharing task (user processes)
+        using a pre-emptive approach
+
+    linux currently uses the "completely fair scheduler"
+
+multi-processor scheduling approaches
+    share queue between cores
+        +automatic load balancing
+        -contention for the queues (locking required)
+        -cache invalid when moving to a different core
+        -translation look aside butters become invalid
+    individual queue for each core
+        +cpu affinity automatically satisfied
+        +contention for shared queue is minimised
+        -less load balancing
+
+processor affinity
+    code show preference to a certain cpu core because it has most recently been running on it
+        there is useful info stored in the cache and registers for this core

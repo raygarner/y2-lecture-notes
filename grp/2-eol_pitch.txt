@@ -1,0 +1,8 @@
+EOI
+    motivation
+    brief understanding and context - existing similar products
+    prelim analysis - libraries, tools etc
+    management - covid, problem addressing
+    style and formatting
+
+slides for pitch video

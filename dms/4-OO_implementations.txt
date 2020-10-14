@@ -1,0 +1,38 @@
+aggregation
+    the object is part of the class but is passed in as a parameter and set using a setter normally. the member object can exist on its own outside of the class
+    compound=-animal
+        the animal can be added to and taken from the compound
+
+Composition
+    the object is instantiated and initialised inside the class and cannot exist outside of the class
+    zoo=-compound
+        the compound cannot be taken from the zoo
+
+inheritance
+    creating a new class based on an existing one
+    superclass (parent) extended
+    subclass (child) extension
+    "Is a" relationship:
+        falcon (subclass) is a bird (superclass)
+        
+method overloading
+    methods with the same name in the same class but with different parameters (different method signature)
+    resolved during compile time
+
+method overriding
+    method with same name declared in subclass and superclass
+    resolved during runtime
+
+overloading and overriding are both examples of POLYMORPHISM
+
+java interface class
+    methods cannot have implementations
+    any declared variables must be final (constant)
+
+java abstract class
+    can have some abstract (empty) methods
+    can have non-final variables
+
+a class can only ever extend one other class but they can implement many interfaces
+
+

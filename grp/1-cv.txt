@@ -1,0 +1,61 @@
+Course info
+===========
+Semester 1 group deliverables
+    eoi (expression of interest) & pitches
+    interim report
+    prototype
+
+semester 2 group deliverables
+    final report
+    code base & document repositories
+    demo day & video
+
+semeseter 1 individual deliverables
+    cv
+    interim peer review (not marked)
+
+semester 2 individual deliverables
+    individual report (your contributions)
+    final peer review (marked eval of teammates)
+
+EOI includes:
+    team CVs
+    written EOI
+    10 min video (the pitch)
+
+Pitch info:
+    10 min pitch video
+    10 min Q&A session on ms teams with sponsor
+
+CV Stuff
+========
+cv order:
+|   contact details
+|   personal statement
+|   education and qualifications (no gcses)
+|   work experience
+|   evidence of skills
+|   interests, activities achievements etc (add chess soc)
+|   referee details (saying references available on request is fine)
+V
+
+education
+    projects
+    most recent first
+
+criteria
+    on time
+    1 or 2 pages
+    most recent first
+    professional language and style
+    good spelling and grammar
+    consistent font
+    correct name and details
+    education correct
+    education/qualification details
+    project/module experience included
+    technical skills
+    soft skills
+    relevant experience
+    extra-curricular
+    tailored cv

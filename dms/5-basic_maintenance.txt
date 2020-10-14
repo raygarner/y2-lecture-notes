@@ -1,0 +1,6 @@
+divide all classes into packages
+    provides individual name spaces
+    clearer organisation and easier division of responsibilities
+
+use abstract classes
+    should not be instantiated

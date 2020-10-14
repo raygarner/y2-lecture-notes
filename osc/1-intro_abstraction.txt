@@ -1,0 +1,21 @@
+The OS is a layer of abstraction for:
+    high-level code compatibility
+    security
+    concurrency
+    resource management:
+        CPU
+        disk
+        memory
+
+Abstraction layers:
+===================
+APPLICATIONS    |
+OS              |
+HARDWARE        V
+
+OS abstraction layers:
+=============================
+user mode                   |
+virtual machine interface   |
+kernel mode                 |
+hardware interface          V

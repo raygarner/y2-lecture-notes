@@ -1,0 +1,87 @@
+a program is passive and just sits on the disk
+a process may be active, have resources assigned to it and has control structures
+
+a process is registered with the OS using its control structures
+    eg an entry in OSs process table or process control blocks
+
+process control block contains all info necessary to admin the process and is essential for context switching 
+
+
+logical address space structure:
+    STACK
+    vvvv
+    ^^^^
+    HEAP
+    DATA
+    TEXT
+
+text - program code
+data - static and global variables
+heap - dynamic memory alloc, grows up as process is running
+stack - stack frames added for function calls, grows down as process is running
+
+states:
+    new - created, waiting to be admitted
+    ready - waiting for cpu to become available
+    running - process on the cpu
+    blocked - cannot continue eg waiting for I/O
+    terminated - no longer executable
+    suspended - processed swapped out
+
+       <----------------------
+       v         ^           ^
+new -> ready -> running -> blocked
+                v
+                exit
+
+process scheduler changes ready to running
+process is preemted by a timer interrupt
+
+read queue
+event queue 1
+event queue 2
+
+ready queue process waiting to be admitted to cpu
+event queues for process exiting from the cpu
+
+the state storing and restoring required for context switching creates overhead so switching processes too often is inefficient 
+
+context switching
+    save process state (registers and pc)
+    update pcb (running -> ready/blocked)
+    move pcb to appropriate queue (ready/blocked)
+    run schedular, select new process
+    update to running state
+    update mmu
+    restore process
+
+process control block (PCB)
+    process id (pid, uid, parent pid)
+    process control info (state, scheduling info etc)
+    process state info (user registers, pc, stack pointer, program status world, mem management info, files etc)
+
+process control blocks and kernel data structures are protect and only accessible in kernel mode
+    only the OS can manage process control blocks
+
+each process in the process table has a PCB linked to it
+
+process table stores all process 
+
+memory tables
+I/O tables
+file tables
+
+system calls for process creatsion
+    unix: fork()
+    windows: NTCreateProcess()
+    Linux: Clone()
+
+| APPLICATION
+| LIBRARY
+V OS
+
+true syscalls are wrapped in the OS libraries eg libc following a well defined interface (eg POSIX, WIN32)
+
+fork() creates an exact copy of the current process
+fork() returns the process id of the child process to the parent process
+fork () returns 0 to the child process

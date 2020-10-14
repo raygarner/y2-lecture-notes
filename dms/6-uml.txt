@@ -1,0 +1,154 @@
+class diagram
+
+use case diagram
+
+activity diagram
+
+state machine diagram
+
+sequence diagram
+
+uml
+    +ensures right communication
+    +captures logical software architecture regardless of programming language
+    +manages complexity
+    +allows for reuse of design
+
+Object-oriented analysis and design process (OOA/D process):
+    1 establish use case diagrams + dev initial test cases
+    2 dev behaviour diagrams
+    3 dev/revise structural diagram
+    4 incrementally implement, document and test the code for each use case
+    5 reconcile the model diagrams
+
+use case diagrams:
+    behaviour diagrams
+    describe actions that the system should perform with users
+    DO NOT represent the order or number of executions
+
+actors
+    entities that interface with system
+    people or other systems
+
+use cases
+    based on user stories
+    what the actors wants from your system
+
+use case diagram only mention use case name
+
+use case specification formally describes use cases
+
+subject
+    classifier representing a business, software or physical system, device under analysis, design or consideration
+
+relationships
+    between use case and actor
+        indicates which actor initiates use case
+    
+    between 2 use cases
+        shows common functionality
+        <<include>> and <<extend>>
+
+<<include>>
+    use cases share same functionality, which is placed in a separate use case
+
+<<extend>>
+   activities which may be performed as part of another activity, but not necessary for the use case to run successfully 
+
+
+use case
+    name
+    purpose
+    pre-conditions
+    base path (optimistic flow) - best case scenario
+    alternative path (pragmatic flows)
+    post-condition
+
+structure diagram
+    class diagram
+
+behaviour diagrams
+    activity diagrams
+    sequence diagrams
+    state machine diagrams
+
+activity diagrams can represent parallel behaviour and flowcharts cannot
+
+activity diagram elements
+    activity
+    control flow
+    synchronisation bar
+    decision node
+    start and stop marker
+    swim lanes
+
+sequence diagram elements
+    participants
+    life lines
+    arrows
+    boxes
+
+state machine diagram
+    shows the states of a single object and the events that cause it to change state
+    no need to make a state machine diagram for every class!
+    1 start state 
+    any number of stop states
+
+class diagram
+    shows the structures and classes in the logical view of a system
+
+class diagram elements
+    classes
+    class relationships
+        associations, dependencies, aggregations, compositions, realisations, generalisations
+    
+identify classes
+    nouns
+
+identify class associations
+    verbs
+
+define multiplicity
+    number of links between source objects and target objects
+    * = unlimited
+    1 = exactly 1
+    0..* = 0 or more
+    1..* = 1 or more
+    0..1 = 0 or 1
+    3..7 = 3 to 7
+
+class representation in class diagrams
+    class name
+    attributes - data in the object of the class
+    operations - ways in which the objects interact
+    + = public
+    # = protected
+    - = private
+    / = derived
+    $ = static
+
+association
+    bi-direction connection between 2 classes
+    weak coupling - both classes remain somewhat independent of each other
+
+dependency
+    directed relationship showing how an element requires another for implementation
+    supplier-client relationship
+
+aggregation
+    "is a part of" relationship
+    one object logically or physically contains another
+
+composition
+    strong form of aggregation
+    multiplicity always 1
+    parts have no meaning outside of the container
+    if container is copied or deleted the same happens to the contained parts - the container is responsible for its contents
+
+realisation
+    abstraction relationship
+    between specification (supplier) and implementation (client)
+
+generalisation
+    superclass to subclass
+    inheritance

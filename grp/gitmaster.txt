@@ -1,0 +1,3 @@
+ensure repo is kept up to date
+ensure nobody commits to master without passing unit and regression tests
+

@@ -1,0 +1,79 @@
+os is responsible for managing and scheduling processes
+    admitting
+    running
+    interrupting
+
+os relies on a scheduler (dispatcher)
+    which uses a scheduling algorithm
+        real time/batch
+
+process schedulers
+    long term
+    medium term
+    short term
+
+long term
+    not normally in modern os, only more advanced systems
+    good mix between processes which use cpu a lot and ones which use a lot of I/O
+    decides when to admit processes
+
+medium term
+    controls swapping (putting them into suspended state)
+
+short term
+    decides which process will run next from ready queue
+
+non pre-emptive schedulers
+    as soon as process is on the cpu, dont interact with process or force it to stop 
+    process will keep running until its finished or until it decides itself that its had enough time on the cpu
+    if the process goes wrong then it may end up getting stuck on the cpu forever...
+
+pre-emptive schedulers
+    uses timer to generate interrupts to tell when to switch processes on the cpu
+
+scheduling algorithm criteria
+    User oriented criteria:
+        response time: time between creating process and execution
+        turnaround time: time between creating process and finishing it
+        predictability: variance in processing times
+
+    System oriented criteria:
+        throughput: number of processes done per hour
+        fairness:
+            processing power/waiting time equally distributed
+            no process kept waiting excessively long (starvation)
+
+first come first served algorithm
+    non pre-emptive
+    +positional fairness
+    +easy to implement
+    -favours long processes
+    -could compromise resource utilisation
+
+shortest job first
+    non pre-emptive
+    starts processes in order of ascending processing time
+    +always has optimal turnaround time
+    -starvation may occur
+    -fairness and predictability compromised
+    -processing times have to be known/estimated beforehand
+
+round robin
+    pre-emptive version of fcfs which forces context switches at periodic time intervals
+    processes run in the order added to the queue
+    processes forcefully interrupted by the timer
+    +improved response time
+    +effective for gp interactive/time sharing systems
+    -increased context switching overhead
+    -favours cpu bound processes over I/O processes
+    -can reduce to fcfs
+    length of time slice must be carefully considered
+
+priority queues
+    like a round robin but runs processes in order of priority
+    priority value is saved in the process control block
+    +can prioritise I/O bound jobs
+    -low priority processes may suffer from starvation
+    may want to temporarily boost the priority of the low priority processes to fix this (priority boosting)
+
+

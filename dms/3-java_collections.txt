@@ -1,0 +1,45 @@
+collection
+    object that represents a group of objects
+    collections api is used for representing and manipulating any collection
+    something that holds a dynamic collection of objects
+
+api = application programming interface
+
+library
+    re-usable chunks of code
+
+API
+    INTERFACE/communication protocol between a client and server to simplify the development of client-side software
+
+Java collections framework core principles:
+    container objects containing objects
+    each container is either a collection or map
+    all containers provide a common set of methods signatures plus their unique set of method signatures
+    provides data structures such as arrays, lists and maps
+    provides algorithms such as searching and sorting
+
+map
+    defines mapping between keys and objects (between two collections)
+
+iterable
+    collections can return an iterator object which can scan over each object in a collection
+
+collection framework interfaces
+    iterable
+    collection (group of objects (elements))
+    map
+    queue
+    dequeue (double ended queue)
+    set
+    list
+
+most interfaces are in java.util.*
+
+interable interface in java.lang.*
+
+typesafe collections via generics
+    ie LinkedList<String>
+    the type cannot be a primitive like 'int'
+        'Integer' class would be used instead in this case
+
+

@@ -1,0 +1,60 @@
+abstraction
+    simple things like objects to represent more complex code and data
+
+encapsulation
+    concept of protecting components of an object from external influences
+
+inheritance
+    concept of a subclass extending or overriding a superclass    
+
+polymorphism
+    concept of using an interface utilised by different types
+    method overloading (compile time)
+    method overriding (run time)
+
+constructors and methods
+    public
+
+helper methods needed only inside the class
+    private
+
+fields
+    private
+
+static constants
+    public
+
+private fields interacted with via
+    accessors (getters)
+    modifiers (setters)
+
+"this" keyword
+    this.field
+    this.method();
+    this(parameters) //one constructor can call another
+    "this" refers to the current object
+
+constructors
+    no return type
+    same name as class they refer to
+    constructors called using "new" keyword when defining new object
+
+object reference is like a pointer to a structure in c
+
+overloaded methods
+    methods of the same class with the same name but different parameter counts/types
+    compiler knows which one to use based on the parameters passed to it
+
+static fields
+    shared by all instances of the class
+    non-static field belongs to a specific instance of the class
+    not usually initialised by constructors
+    if a class has only static fields theres no point instantiating it since all instances will be the same
+    
+public fields accessed by
+    instance.field
+
+static methods
+    belong to the class, not an instance of it
+    static methods cannot access data or methods of an instance of the class
+    static methods usually only perform operations on its parameters and return a result

@@ -1,0 +1,51 @@
+the outcome of programs may become unpredictable when sharing data
+
+inconsistencies can be created when a processes running concurrently are interrupted while manipulating data
+
+increment a counter
+    read value from memory into register
+    add one to register
+    store back in counter memloc
+    
+note that the program could be interrupted at any point while incrementing the counter
+
+restore cpu registers from thread control block (TCB)
+
+race conditions
+    multiple threads accessing shared data and the result is dependent on the result which the instructions are interleaved
+
+the os must provide locking mechanisms to support mutual exclusion and prevent starvation and deadlocks
+
+the os must allocate and deallocate resources safely to avoid interference, deadlocks and starvation
+
+critical section
+    instructions where shared resources (variables) are changed
+
+mutual exclusion
+    one process at a time in the critical section
+    processes must get permission to enter the critical section
+        request lock
+        hold lock while executing critical section
+        release lock
+        (locks are simply stored as variables)
+
+processes must be guaranteed that they'll enter the critical section at some point
+
+processes waiting times for entering the critical section must be fair and they cannot wait indefinitely
+
+mutual exclusion
+    software based
+    hardware based
+    mutexes, semaphores, monitors (constructs within the programming languages)
+
+aswell as mutual exclusion, deadlocks have to be prevented
+
+processes/threads are deadlocked if each process/thread is waiting for an event that only the other process/thread can cause
+
+deadlocks can only occur if there is
+    mutual exclusion
+    a resource that can be held while requesting another resource
+    no pre-emption
+    circular wait (processes waiting for each other)
+
+

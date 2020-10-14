@@ -1,0 +1,11 @@
+corrective maintenance
+    finding and fixing errors
+
+adaptive maintenance
+    adapting the system to environmental changes
+
+perfective & preventive maintenance
+    system requirements have changed
+    new methods for quality increase or bug prevention identified
+
+

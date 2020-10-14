@@ -1,0 +1,101 @@
+a process consists of 
+    resources
+    execution trace (entity that gets executed)
+
+processes can share their resources between multiple execution traces
+
+a process can have multiple execution traces (threads)
+    think back to p_thread stuff in c
+    fork() creates a new process, not a new thread
+
+all threads have access to the shared resources (file access) and global variables
+
+threads have their own execution context (program counter, stack registers etc)
+
+threads have states and transitions (new, running, blocked etc)
+threads have a control block
+
+resources shared between threads of a process
+    address space
+    global variables
+    open files
+    child processes
+    pending alarms
+    signals and signal handlers
+    accounting info
+
+resources unique to each thread
+    program counter
+    registers
+    stack
+    state
+    local variables
+
+threads incur less overhead to create/terminate/switch than processes
+
+a hyperthreaded core is just a core with a multiple set of registers
+    they have direct support for multi-threading
+
+inter-thread communication is easier/faster than interprocess communication
+    you can assume a thread belonging to the same process is not malicious which is not the case for processes
+    no protection boundaries are required because they are operating in the same address space in memory
+    synchronisation must be considered carefully with threads however
+
+threads can be executed in parallel (concurrently)
+    useful for processing large amounts of data
+
+user threads (many-to-one)
+    thread management carried out in user space with help from a user library
+    the process maintains a thread table managed by the runtime system without the kernel even knowing
+        similar to a process table
+        used for thread switching
+        tracks thread related info
+    +threads in user space (no mode switches needed)
+    +full control over the thread schedular
+    +OS independent
+    -blocking syscalls suspend the entire process since all threads are mapped to a single process, managed by the kernel
+    -no true parallelism since the process is scheduled onto a single cpu
+    -no clock interrupts (user threads are non pre-emptive)
+    -page faults result in blocking the whole process
+
+kernel threads (one-to-one)
+    kernel manages the threads
+    user application accesses threading facilities via API and syscalls
+        thread table is in the kernel, containing thread control blocks (subset of process control blocks)
+        if a thread blocks, the kernel can choose a thread from the same process or a different one
+    +true parallelism can be achieved
+    +no run-time system
+    -frequent mode switches are required which results in lower performance
+    this approach is widely applied by windows and linux
+    
+
+hybrid implementations (windows 10)
+
+null fork
+    overhead in creating, scheduling, running and terminating a null process/thread
+
+Signal wait
+    overhead in synchronising threads
+
+thread libraries provide an API for managing threads
+
+thread libraries can be implemented in
+    user space
+    in the kernel and accessed via syscalls
+
+thread APIs:
+    POSIX's pthreads
+    windows threads
+    java threads
+
+POSIX threads
+    this is a specification that defines as set of APIs and what they should do
+    can be implemented as user or kernel threads
+
+core pthread functions
+    pthread_create
+    pthread_exit
+    pthread_join
+    pthread_yield
+    pthread_attr_init
+    ptheard_attr_destroy

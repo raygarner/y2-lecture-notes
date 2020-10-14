@@ -1,0 +1,48 @@
+fetch decode execute
+    can happen in parallel
+
+each cpu has an instruction set
+
+registers are fast memory close to/in the cpu
+    program counter (pc) - stores address of next instruction
+    program status work (PSW) - stores status mode of the cpu
+        eg kernel/user mode
+
+context switching
+    cpus state and register contents must be stored/restored when cpu exection switches between processes
+
+cpu memory management unit (mmu)
+    always assumes that the program runs from address 0 in memory
+        could be anywhere in physical memory in reality
+    physical memory is abstracted by the mmu
+    logical address space VS physical address space
+    the program only sees the logical address space
+    physical address = logical address + offset
+    the offset is where the start of the program is stored in physical memory
+
+    offset        program A
+    ===========================
+    |-------------|-----------|
+    ^             ^
+    p0            l0
+                  p14
+
+cpu affinity 
+    moving processes unnecessarily is a bad idea because they will lose access to the info stored in the cache for that core
+    cores can share caches or have their own depending on the architecture
+
+fetch -> decode -> execute -> check for interrupts
+    ^                           |
+    |---------------------------V
+
+timer generates interrupt
+cpu finishes current instruction and checks for interrupt
+transfer to interrupt routine if there is one
+    hardware saves process state (PSW, PC)
+    set PC to interrupt service routine (ISR)
+    save registers and other state info
+carry out interrupt service routine (scheduler)
+restore next process to run
+    
+OSs are heavily linked and dependant on computer architecture
+

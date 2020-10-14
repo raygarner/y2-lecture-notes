@@ -1,0 +1,12 @@
+variables:
+    H - high priority task
+    M - medium priority task
+    L - low priority tasks
+    R - shared resource
+
+L is running and is holding R
+H cannot pre-empt L because it needs R to run
+M does not need R so it pre-empts L (note L is still holding R)
+M is running and H cannot pre-empt it because it needs R to run and L is still holding R
+
+
