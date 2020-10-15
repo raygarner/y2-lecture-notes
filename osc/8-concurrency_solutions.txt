@@ -1,0 +1,42 @@
+petersons solution
+    software based
+    works well on older machines with no hardware for concurrency
+    two shared variables
+        turn: indicates which process is next into the critical section
+        boolean (flag): indicates that a process is ready to enter its critical section
+    can be generalised into multiple processes
+    satisfies all critical requirements for 2 processes
+================================================================
+
+disabling interrupts (hardware solution)
+    disable interrupts while executing critical section
+    this approach DOES NOT work with multi core CPUs
+---------------------------------------------------------
+atomic instructions (hardware)
+    test_and_set() and swap_and_compare() implemented as set of atomic (uninterruptible) instructions
+    reading and setting the variables done as one complete set of instructions
+    if test_and_set() and swap_and_compare() are called at the same time, they will be executed one after the other
+    they are used in combination with global lock variables
+    test_and_set() and swap_and_compare() are hardware instructions
+        ie accessible to the OS and not to user programs
+    this technique works in conduction with global lock variables
+        they will run if the lock is in use (true(1) is assumed)
+    -busy waiting is used
+    -deadlock is possible
+
+atomic instructions
+    "all or nothing"
+    the block of instructions must be entirely executed without interruption
+==============================================================
+
+OS based approach: Mutexes
+    provided by the OS
+    boolean lock variable to indicate availability
+    2 atomic functions used to manipulate the mutex
+        acquire() - set to false (use before entering critical section
+        release() - set to true (use after exiting the critical section)
+    acquire() and release() MUST be atomic
+    -calls to require result in busy waiting
+        -detrimental to performance on single CPU systems
+    +context switches can be avoided
+    +efficient on multi-processor systems when locks are held for a short time
