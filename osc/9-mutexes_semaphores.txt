@@ -1,0 +1,72 @@
+mutexes
+    approach for mutual exclusion
+    provided by the OS
+    contains boolean lock variable
+    lock variable is true if lock is available
+
+acquire()
+    sit in while loop waiting for variable to be available (become true)
+    when it does, this function sets the lock variable to false (unavailable)
+
+release()
+    simply sets the lock variable to true (available)
+    dont need the loop for busy waiting because you are the one who owns the lock when this is being called
+
+acquire and release must be atomic (cannot be interrupted)
+
+mutex locks
+    -calls to acquire result in busy waiting
+    +context switches can be avoided with short critical sections
+    +efficient on multi-processor systems when locks are held for a short time
+
+==================================================================
+
+semaphores
+    approach for mutual exclusion (and process syncing)
+    provided by the OS
+    contains an int variable
+    binary semaphore: int is 0 or 1
+    counting semaphore: int is 0-N
+
+wait()
+    called when a resource is acquired
+    counter id decremented
+    block the process/thread when counter is negative
+        process/thread joins blocked queue
+        process/thread state is changed from running to blocked
+        control transferred to process scheduler
+
+signal()/post()
+    called when resource is released
+    removes a process/thread from the blocked queue if counter is <= 0
+        process/thread state changed from blocked to ready
+        FIFO or LIFO can be used for the queue (FIFO=good choice)
+
+wait() and post()/signal() must be atomic
+    they are used via the syscalls block() and wakeup()
+
+positive values indicate that the semaphore is available
+
+negative values mean indicates how many processes/threads waiting to get the semaphore
+
+processes do no not share the same memory but threads do
+
+semaphores within the same process declared as global variables of type sem_t
+
+sem_init()
+    initialises the value of a semaphore
+
+sem_wait()
+    decrements value of a semaphore
+
+sem_post()
+    increments value of a semaphore
+
+synchronising code has a performance penalty
+    only sync when necessary
+    synchronise as few instructions as possible
+
+priority inversion can still happen with semaphores
+
+programming with mutexes and semaphores is prone to errors
+
