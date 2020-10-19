@@ -1,0 +1,15 @@
+race condition
+    consumer removed last element
+    producer adds new element
+    consumer should have gone to sleep but no longer will
+    consumer consumes non-existing elements
+
+consumer producer concept works by storing the value of counter 'items'
+
+you can have n consumers, m producers and buffer size N
+    sync - enforces mutual exclusion for the buffer
+    empty - keeps track of the amount of empty buffers (initialised to N)
+    full - keeps track of the number of full buffers (initialised to 0)
+    empty and full are counting semaphores and represent resources
+
+
