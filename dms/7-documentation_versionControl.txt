@@ -1,0 +1,64 @@
+comments are essential
+
+there are auto-documentation tools for commenting in a standardized format
+    doxygen (C++, C#, Java)
+    javadoc (Java)
+    doxygen > javadoc (according to laramee anyway)
+
+javadoc
+    /** */ - comments
+    @<tag>
+        @param
+        @return
+        @throws/@exception
+        @depreciated
+        @code
+
+version control
+    recover old versions
+    examine code history
+    works across networks
+    similar to an NFS but with additional functionality:
+        manages concurrency and tracks all changes
+
+methods of dealing with concurrency:
+    lock-modify-unlock
+        -user can lock a file a leave it locked
+        -serialization (only one person can work on a file at once)
+        -no protection for breaking dependencies between files
+    copy-modify-merge
+        -only for text files
+        -merges can be unpredictable
+        +users work in parallel
+        +concurrent changes are auto merged
+        +conflicts are infrequent
+        
+recommended:
+    only one person works on each class (each file)
+
+working copy
+   latest version of code that you can make changes to
+   each project gets a subdir
+    a working copy is one of those subdirectories
+
+git commit
+    atomic operation
+    publishes changes to files and dirs
+    a commit = a new state of the repo file system tree, known as a revision
+
+revisions
+    start at 0 and increment for each commit
+
+time to check in code:
+    once its tested and working
+    end of the working day
+
+can fork branches into sub branches
+
+branching
+    each commit is a node in a linked list (on the disk)
+    branch is a pointer to that node
+    history tree is preserved by data structure
+    server has its own copies of branches
+
+

@@ -1,0 +1,71 @@
+scrum is an agile framework
+
+lightweight, iterative and incremental framework
+
+scrum recognizes that customers will change their minds about what they want/need and that there will be unpredictable challenges
+
+scrum accepts that the problem cannot be fully defined in advance
+
+RIDAs = risks, impediments, dependencies and assumptions
+
+product backlog
+    breakdown of work to be done
+    ordered list of product requirements
+    user stories, use case diagrams
+    features, bug fixes, non-functional requirements
+
+product owner
+    defines product in customer-centric terms (user stories etc)
+    priorities aspects of the project
+    interface between the engineers and the stakeholders
+        define and announce releases
+        communicate delivery and team status
+        share progress during meetings
+        share RIDAs with stakeholders
+        negotiate priorities, scope, funding and schedule
+        ensure that project backlog is visible, transparent and clear
+
+scrum master
+    coaching the team with scrum principles    
+    promoting self-organisation within the team
+    organising team evens to ensure regular progress
+
+sprint
+    unit of development
+    length of a spring is defined in advance for each sprint and is normally about 2 weeks
+    sprint planning
+        define goal and required backlog items
+    sprint review/retrospective
+        reviews progress from the sprint to show to stakeholders
+        identify improvements which could be applied to future sprints
+    useful output should be created from each sprint
+        eg integrated, tested and documented software
+
+sprint planning
+    define scope of sprint
+    select backlog items to be completed in one sprint
+    create sprint backlog (work to be completed this sprint)
+    agree on sprint goal (what is the deliverable at the end of this sprint)
+    4 hours sprint planning for a 2 week sprint is recommended
+    
+daily scrum
+    every day meeting during a sprint
+    only developers should contribute
+    what did i complete yesterday that contributed to the team meeting our sprint goal?
+    what do i plan to complete today to contribute to the team meeting our sprint goal?
+    do i see any impediment that could prevent me or the team from meeting our sprint goal?
+
+sprint review
+    reviews work
+    plans work that wasnt completed
+    demos the completed work to the stakeholders
+    collabs with stakeholders on what to work on next
+    DO NOT demo incomplete work
+    2 hours for a 2 week sprint (recommended)
+
+sprint retrospective
+    reflects on past sprint
+    IDs continuous process improvement actions
+    what went well?
+    what went poorly?
+    what could bee improved for next sprint?

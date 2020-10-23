@@ -1,0 +1,129 @@
+Object
+    set of closely related data and methods
+    knows what it is
+    knows its responsibilities and how to fulfil them
+    has a role to play in the system
+    does not know how to do anything else
+
+Messages
+    communication between objects (method calls and returns)
+
+Behaviour
+    set of messages recognized by an object
+
+Method
+    function performed by an object after it receives a valid message
+
+Signature
+    method name, parameters and types, values returned
+
+Class
+    template that defines an object
+    generic spec of all such objects
+
+Instance
+    classes are instantiated
+    each instance is an object
+
+inherit behaviour from parent classes
+
+define additional behaviour
+
+redefine functionality
+
+OO Design
+    written specification
+    initial exploration
+        find classes, operations, collaborations
+    detailed analysis
+        build class hierarchies
+    subsystem ID
+        classes/systems that collab 
+
+OO Design process is iterative and represents only guidelines
+
+guidelines for identifying objects
+    classes correspond to nouns (eg vertex)
+    use singular nouns by default
+    methods correspond to verbs (vertex.draw())
+    identify WHAT a class does
+    DO NOT focus on how a class does its job
+    identify the information/data the class needs to carry out its task
+    get rid off redundant classes (ie any similar or synonymous nouns)
+    multiplicity corresponds to collections, eg a VertexCollection class
+
+Only the person implementing the class should worry about how it works
+
+the more shared code and shared methods, the better
+
+subsystem
+    set of classes (and/or other subsystems) that collab to carry out a job
+    heavy collaboration amongst a set of classes can mean that it should be a subsystem
+    +increases re usability
+    +hidex collab complexity
+    +extra abstraction
+
+client-server model 
+    object collaborations are one-way
+    one object requests service of another object
+    client requests service
+    service receives request and provides service
+    interaction defined by a 'contract'
+
+usually objects act as both clients and servers at different times
+
+class responsibilities
+    actions of an object
+    purpose of object in the system
+    define services provided by an object
+    represent only the publicly available services
+
+concentrate on what a class does and not how it does it
+
+identifying responsibilities
+    verbs in specification
+    examine information nouns in spec
+        may become an attribute of a class or part of a composite class
+    perform a system walk-through
+        consider a variety of scenarios and execute the system
+        scenarios based on functional view
+        look for places where something happens because of system input
+    re-examine candidate classes
+
+if more than 1 person is required to work on a class then it should be split into 2
+
+
+class intelligence
+    what services does it use?
+    what services does it provide?
+
+centralised intelligence
+    one object interfacing all objects
+    centralised control
+    +easier to understand information flow
+    -system behaviour becomes less adaptable
+    -less code and design sharing
+    -harder to dev teams to work effectively
+
+distributed intelligence
+    distribute intelligence equally amongst classes
+    each object knows relatively little
+    
+checking distribution
+    compare number of responsibilities assigned to each class
+    if a class has lots of responsibilities
+        maybe responsibilities aren't defined with enough detail
+        maybe divide the class up
+
+complex responsibilities can be considered compound responsibilities and then shared between multiple classes
+
+Inheritance
+    Python is a snake
+    child-class is a parent-class
+
+composition
+    finger is a part of hand
+    
+unassigned responsibilities 
+    maybe a class is missing
+    an existing class can take on the responsibility

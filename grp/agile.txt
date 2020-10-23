@@ -1,0 +1,28 @@
+early and continuous delivery of valuable software
+
+welcome changing requirements at any stage in development
+
+deliver working software frequently (weekly scale)
+
+close cooperation between business folk and devs
+
+working software as the main measure of progress
+
+sustainable development rate at a constant pace
+
+SIMPLICITY
+
+regular team reflection on increasing effectiveness
+
+-----------------------------------------------------
+
+agile is more adaptive than predictive
+
+
+agile vs waterfall
+    in agile testing is completed in the same iteration as programming
+    in waterfall they are separate phases
+
+
+
+

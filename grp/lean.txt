@@ -1,0 +1,28 @@
+subculture of agile development community
+
+eliminate waste
+amplify learning
+decide as late as possible
+deliver as fast as possible
+empower the team
+build integrity in
+optimize the whole
+
+anything not adding value to the customer is considered waste:
+    partially done work
+    extra features
+    relearning
+    task switching
+    waiting handoffs
+    defects
+    management activities
+
+    building the wrong feature/product
+    mismanaging the backlog
+    rework
+    unnecessarily complex solutions
+    extraneous cognitive load
+    psychological distress
+    waiting/multitasking
+    knowledge loss
+    ineffective comms

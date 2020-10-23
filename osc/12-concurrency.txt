@@ -1,0 +1,74 @@
+concurrent database processes
+    readers, writers files, I/O devices etc
+
+reading a record (variable) can happen in parallel fine
+
+writing needs syncing (ie exclusive access)
+
+solution 1
+    naive implementation with limited parallelism
+
+solution 2
+    readers recieve priority: no reader is kept waiting unless a writer already has access. writers may starve
+    counter to track number of readers
+    sync - mutex for mutual exclusion of the reader counter
+    rwSync - semaphore that syncs the readers and writers set by the first/last reader
+
+solution 3
+    writing is performed as soon as possibly. readers may starve
+    iReadCount, iWriteCount to track reader and writer counts
+    sRead/sWrite to sync the reader's/writer's critical section
+    sReadTry to stop readers when there is a writer waiting
+    sResource to sync the resource for reading/writing
+
+mutex locks are more suitable for short critical section
+
+semaphores are for where the critical section is longer
+
+process table
+    array containing process control structures
+    process table has a fixed number of elements in it
+    new processes are added to the process table
+
+emtpy PID list
+    linked list with elements containing of empty indexes in the process table
+    must be initialised with PIDs (size of the process table)
+
+create a process generator thread
+    "find" a free PID
+    creates processes by calling the generateProcess() function with the given PID
+    add the process to a list for the long term scheduler (newQueue)
+    creates a pre-defined number of processes
+    is woken up when there is a free PID
+
+long term scheduler
+    thread that runs at regular intervals
+    removes processes from the newQueue
+    adds processes to the ready queues
+==================================================================
+COURSEWORK:
+
+short term scheduler
+    removes processes from the ready queues (FCFS/RR)
+        stretch goal: make fcfs pre-emptive
+    goes to sleep if there are no processes in the ready queues
+    is woken up as soon as process are available
+    runs as long as processes are remaining
+    multiple CPUs are simulated by creating multiple short term scheduler threads
+
+simulation of jobs
+    the short term scheduler calls:
+        simulatePreEmptiveProcess()
+        simulateNonPreEmptiveProcess()
+    if processes are finished they are added to the terminatedQueue otherwise
+
+Termination
+    thread running at regular intervals
+    removes the processes from the terminatedQueue
+    removes processes from the process table
+    adds the available PID to the freePIDQUEUE
+    calculated process stats
+
+priority booster
+    runs at regular intervals
+    moves process control blocks from low priority queues into high priority queues (without changing the priority values inside the PCBs)

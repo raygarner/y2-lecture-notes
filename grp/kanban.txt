@@ -1,0 +1,15 @@
+lean method
+
+WIP = work in progress
+
+kanban board used to visualise progress and process from start to finish
+
+provide a visual process management system to aid decision making about what, when and how much to produce
+
+can be used in combination with scrum
+
+kanban board
+    visualizes work for the dev team
+    captures WIP limits for dev steps
+    documents policies/rules
+     

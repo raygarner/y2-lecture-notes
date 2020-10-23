@@ -1,0 +1,7 @@
+dining philosophers solution: maximum parallelism
+    state[n] - state variable for every philosopher (thinking, hungry, eating)
+    phil[n] - one semaphore per philosopher (not forks, init to 0)
+        philosopher goes to sleep if his neighbour is sleeping
+        neighbours wake up the philosopher if they finish eating
+    sync - one semaphore/mutex to enforce mutual exclusion of the critical section (while updating the states)
+    
