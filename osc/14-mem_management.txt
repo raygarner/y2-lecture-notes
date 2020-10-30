@@ -1,0 +1,80 @@
+relocation
+    addresses are relative to where the program is loaded
+    a prograama cannot just generate static addresses
+
+protection
+    once you have 2 or more programs in memory, they must be protected from each other
+
+logical address
+    memory address as seen by the process
+    independent of the current physical memory assignment
+    relative to start of program
+
+physical address
+    actual location in main memory
+
+logical address space must be mapped onto the physical address space
+
+MMU has registers storing a base address and limit
+    base register: start address of the partition
+    limit register: holds the size of the partition
+    at runtime:
+        base register added to logical (relative) address to generate the physical address
+        result address it compared to the limit register
+
+fixed partitioning
+    -leads to internal fragmentation
+    -there may not be an exact match between the process requirements and the available partitions
+    -the partition may not be used entirely
+
+dynamic partitioning
+    variable number of partitions of which the size and starting address can change over time
+    a process is allocated the exact amount of contiguous memory it requires, thus preventing any internal fragmentation
+
+swapping
+    holds some of the processes on the drive and shuttles process between the drive and main mem
+    reasons:
+        some processes dont run often
+        in case there are more processes than partitions
+        the memory requirements of a process have changed
+        total amount of memory required for all the processes is more than the available memory on the system
+
+
+stack |
+..... v
+....
+....  ^
+heap  |
+data
+text
+
+exact memory requirements often can't be known in advance, since stack and heap grow dynamically
+    might be a good idea to allocate more than necessary then...
+
+external fragmentation
+    swapping a process out of memory to disk will create a "hole"
+    new process may not be able to fill the entire hole, leaving an unused block
+    new process may be too large to fill the hole
+
+memory compaction
+    rearranging the partitions to fill the holes
+    -has heavy overhead
+    -requires dynamic relocation
+
+keeping track of available memory
+    bitmaps
+    linked lists
+
+bitmap for tracking mem
+    split memory up (eg 4kb)
+    have a bitmap where each bit corresponds to each kb of memory
+        0 means that block is free, 1 means it is in use
+    bitmaps are rarely used:
+        -having small blocks means the bitmap is big and takes longer to explore
+        -having large blocks can lead to internal fragmentation
+
+linked list:
+    each link contains items like the start of the mem block, block size, free/used status
+        similar principle to run length encoding
+    this means the allocation of processes to partitions becomes easier
+    the linked list can be traversed extremely fast

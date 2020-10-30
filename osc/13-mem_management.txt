@@ -1,0 +1,82 @@
+memory hierarchies
+    registers, l1/l2/l3 cache
+    main memory
+    disks
+
+higher memory is faster, more expensive and volatile
+
+lower memory is slower, cheaper and non-volatile
+
+OS provides memory abstraction
+
+memory can be seen as one linear array of bytes/words
+
+OS jobs
+    allocate/deallocate mem
+    keep track of used/unused mem
+    distribute mem between processes (and create infinite mem illusion)
+    control access with multiprogramming
+    transparently move data from memory to disk
+
+partitioning
+    contiguous: all section of the process code are put contiguously in memory
+    non-contiguous: sections of the process code are put in different sections of memory, not necessarily even in a specific order
+
+contiguous approaches:
+    mono-programming
+        only one process can be loaded into mem at once
+    multi-programming with fixed partitions
+        memory split into blocks and each block can have a process loaded into it
+    multi-programming with dynamic partitions
+        same with different sized partitions
+
+mono-programming
+    memory only contains the code for a single process and OS/kernel code
+    process has direct access to physical memory (no address translation takes place)
+    process allocated contiguous block of memory
+    processes are always allocated the entire memory space
+    overlays allow programmers to use more memory than available (if the code for a processes is larger than the amount of mem the system has)
+    -processes have access to OS memory since they have direct mem access
+    -low utilisation of resources
+    -multiprogramming is expected on modern machines
+   
+direct mem access and mono-programming are common in basic embedded systems and modern consumer electronics
+    washing machines
+    microwaves
+    car ECUs
+
+multi-programming can be simulated through swapping with a mono-programming system
+    swap process out to disk and load in a new one
+    apply threads within the same process (still one process)
+
+multi-programming probabilistic model
+    CPU utilisation: 1 - p where p = time that all process are waiting
+    p = I/O wait time in %
+    probability than all process are waiting for I/O: p * p * p * p ...
+        p = 80%
+        n (process count) = 4
+            CPU util = 1 - 0.8^n
+    CPU utilisation increases with the number of processes and down as more I/O is used
+    -this model assumes that all process are independent (not true IRL)
+    -more complex models could use queuing theory
+
+partitioning: fixed partitions of equal size
+    memory divided into static contiguous and equal sized partitions which have a fixed size and a fixed location
+    +any process can go into a partition as long as it can fit
+    +little overhead and easy to implement
+    OS keeps track of which partitions are used and free
+    -low memory utilisation
+    -internal fragmentation (partition may be unnecessarily large)
+    -overlays must be used if a program doesn't fit into a partition
+
+fixed partitions of non-equal size
+    +reduces internal fragmentation
+    process to partition allocation must be carefully considered...  
+    dont allocate small processes to big partitions to avoid fragmentation
+
+fixed partition allocation methods
+    one private queue per partition
+        +assigns each process to the smallest partition it can fit in to reduce internal fragmentation
+        -can reduce mem utilisation (lots of small jobs mean large partitions go unused) and result in starvation
+    a single shared queue
+        -can end up assigning small process to large partitions so may lead to more internal fragmentation

@@ -1,0 +1,32 @@
+venn diagrams to show overlapping responsibilities for classes
+
+dont allow abstract classes to inherit from concrete ones
+
+eliminate non-functional classes
+
+move common responsibilities up the hierarchy
+    -have parent do job if two children are doing the same job
+
+design as many abstract classes as possible
+    +extensibility
+    +simplicity
+    +code sharing
+    one responsibility is enough to justify an abstract class
+    have concrete classes inherit from abstract classes
+
+abstract classes are common when implementing interfaces
+
+Responsibilities represent only the public services the class provides
+
+Rectangle
+^
+|
+Square
+^
+|
+UnitSquare
+^
+|   (means is a-kind-of)
+
+
+

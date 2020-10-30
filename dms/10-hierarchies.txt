@@ -1,0 +1,11 @@
+tools to provide global view
+    hierarchy graphs
+    venn diagrams for responsibilities 
+    contract
+
+multiple inheritance (class has 2 parent classes)
+    generally a BAD idea because:
+        which parent's constructor is executed first? You can't be sure...
+    java does not support multiple inheritance
+    C++ supports it
+

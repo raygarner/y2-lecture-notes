@@ -1,0 +1,16 @@
+initial design
+    classes 
+    responsibilities
+    collaborations
+
+second stage
+    analyse hierarchies
+    identify contracts
+
+subsystem
+    group of classes that collaborate to support a set of contracts (closely related responsibilities) 
+
+coupling
+    how much classes depend on each other
+
+subsystems are meant to simplify interactions

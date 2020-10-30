@@ -1,0 +1,37 @@
+Collaboration
+    interaction between client and server
+    server has a responsibility to serve the client
+
+defining collaborations helps
+    identify subsystems
+    show the flow of control and information
+
+relationships
+    is-part-of
+    has-knowledge-of
+    depends-upon
+
+class hierarchy
+    tabby is a kind of cat
+
+composite hierarchy
+    a leg is part of a body
+    each component has a different role to play
+    the leg does not need to know about the body, just provides the services
+    the body must know about the leg
+
+container objects
+    sets, arrays, lists etc
+    
+
+EXAMPLE:
+========
+Class: CreationTool
+SuperClass: Tool
+SubClasses: LineCreationTool, RectangleCreationTool
+Accepting appropriate input: UserInput
+Determining location: UserInput
+Creating a new instance: DrawingElement
+
+
+
