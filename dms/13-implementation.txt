@@ -1,0 +1,41 @@
+protocols
+    protocol = set of signatures to which a class responds
+    specific signatures for methods
+
+contract
+    set of responsibilities
+
+responsibility
+    set of public methods
+
+method names
+    verbs
+
+signature
+    arguments and their types for a method
+
+functions should have true/false return types by default (not void)
+    return true if completes correctly
+    return false if doesnt complete correctly
+
+default settings make a massive practical difference
+    eg whether the default is to print double sided or not
+
+class documentation
+    name and abstract/concrete ID
+    immediate parents and children
+    reference to location in hierarchy and collaboration graphs
+    description
+    collaborations
+    responsibilities for each collaboration defined in this class
+    list signatures for each of the responsibilities added for collaborations
+    dont worry about listing private responsibilities
+    implementation notes
+
+subsystem documentation
+    name
+    classes
+    references to hierarchy and collab graph locations
+    description
+    contracts supported by the subsystem
+    list which class/subsystem is dealing which each contract
