@@ -1,0 +1,69 @@
+keeping track of available memory
+    bitmaps
+    linked lists
+
+os has to manage free space
+
+allocating available memory with 'first fit' method
+    scans from start of linked list until a node is found representing a block of free space with enough space
+    if the process doesnt take up all of the space, the node will be split into 2 in the linked list and the first one will represent the process and the second one will represent the free space which wasn't taken up by the process
+    -doesnt take into account that there may be a node which fits the process in perfectly after one that can accommodate it adequately has been found
+
+allocating available memory with 'next fit'
+    keeps a record of where it got to last time the memory was allocated and carries on from this point next time
+    -actually has worse performance than first fit method in simulations
+
+allocating available memory with 'best fit'
+    searches the entire linked list to find the smallest hole big enough to house the process
+    O(N) complexity
+    -slower than first fit
+    -more wasted memory (because the left over holes are so tiny they are useless)
+
+allocating available memory with 'worst fit'
+    searches the entire linked list to find the largest hole big enough to house the process
+    this leaves much bigger holes that may be useful
+    O(N) complexity
+    -simulations still show this has relatively poor performance
+
+allocating memory with 'quick fit'
+    maintains lists of holes with commonly used sizes (eg 4k, 8k, 12k etc)
+    odd sizes can be categorised into the nearest size or into a special list
+    much faster than quick fit to find required size hole
+    -creates lots of small holes like best fit
+    -hard to find neighbours for coalescing (combing empty partitions) is harder
+
+coalescing
+    takes place when two adjacent entries in the linked list become free 
+    when a block is freed, both of its neighbours are examined
+        if they are free they are combined (coalesced) with the block that was just freed
+    one node in the linked list replaces the multiple free ones
+    the earliest node becomes the new start point
+
+compacting
+    free blocks end up being distributed across memory
+    compacting is used to join up the free memory blocks but it is time consuming
+        to do this, processes are swapped out and the free blocks are coalesced
+        the processes are then added back at the lowest possible locations
+
+paging
+    non-contiguous management scheme
+    uses fixed partitioning and code re-location
+    memory split into much smaller blocks and one/multiple blocks are allocated for a process
+        the blocks don't have to be contiguous in main memory, but the process will still perceive them as contiguous
+    +internal fragmentation is reduced to the last "block" only
+    +no external fragmentation since physical blocks are stacked directly on top of one another in memory
+    page = small block of contiguous memory in logical address space (as seen by the CPU and process)
+    frame = small contiguous block in physical memory
+    pages and frames are usually the same size
+        a power of 2 normally
+        between 512B and 1G
+    logical address (page number, offset within page) will need to be translated into a physical address (frame number, offset within frame)
+        each logical page needs a separate "base register" that specifies the start of the associated frame
+        base registers stored in the "page table"
+
+page table
+    page table can be thought of as a function
+        frameNumber = f(pageNumber)
+    every process has its own page table with its own base registers
+    the OS keeps a list of free frames
+
