@@ -1,0 +1,56 @@
+memory
+    can be seen as a linear array of bytes/words
+    address ranges from 0 to (N-1)
+    N address lines can be used to specify 2^N addresses
+    nowadays each cell of memory is normally a byte
+
+paging
+    logical address is relative to start of program in memory
+    right most m bits represents offset within the page (frame)
+    left most n bits represent the page (frame) number
+    offset size is the same for the page and the frame (because they're the same size)
+    page number to frame number mapping is held in the 'page table'
+
+address translation
+    extract page number from logical address
+    retrieve frame number in page table using the page number as an index
+    add the offset to the start of the physical frame
+
+hardware implementation of address translation
+    MMU intercepts logical addresses
+    MMU uses a page table like above to look up frame number
+    the physical address that has been found is put on the address bus
+    
+paging benefits
+    code execution and data alteration restricted to a small subset (number of pages) at any point in time
+    within a process, the code and data references are clustered
+        principle of locality
+    not all pages have to be in memory at the same time
+        wasteful to load an entire program/data set of pages into memory
+        desired blocks can be loaded on demand
+
+resident set = pages that are loaded in main memory
+
+page fault is generated if the processor accesses a page that it not in memory
+    results in an interrupt (process enters blocked state)
+    I/O operation started so that the page can be retrieved
+    context switch may take place
+    an interrupt indicates that the I/O operation is complete (process enterers the ready state)
+
+virtual memory
+    since not all pages for a process need to be in memory at once, more process can be maintained in main memory
+    virtual memory allows the logical address space to be larger than the physical address space
+
+page table entry:
+    present/absent bit: indicates whether the page/frame is in memory
+    modified bit: indicates whether the page/frame has been modified (and is now different to the copy of it on the disk)
+    referenced bit: indicates whether the page is in use
+    protection and sharing bits: indicates the permissions for the page/frame (read, write, execute)
+
+storing page tables
+    too big to be stored in registers
+    stored in (virtual) main memory
+
+maintaining acceptable speeds for usage with the page table
+    have page tables stored in another page table
+    no need to keep all page tables in memory

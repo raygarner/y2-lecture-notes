@@ -1,0 +1,37 @@
+design pattern
+    solution that addresses a problem which occurs repeatedly
+
+pattern specification has:
+    name
+    problem
+    solution
+    consequences
+
+creational patterns
+    builder
+    prototype
+    singleton
+    factory method
+    abstract factory (factory of factories)
+
+structural patterns
+    adapter
+    bridge
+    composite
+    decorator
+    facade
+    flyweight
+    proxy
+
+behavioural patterns
+    iterator
+    mediator
+    interpreter
+    observer
+
+model, view, controller
+    detect cars = controller
+    traffic lights = view
+    regulate traffic = model
+
+
