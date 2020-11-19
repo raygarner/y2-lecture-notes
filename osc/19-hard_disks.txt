@@ -1,0 +1,81 @@
+Hard disk
+    multiple aluminium/glass platters (disks) covered with magnetisable material
+    R/W heads fly just above the surface and are connected by a single disk arm controlled by a single actuator
+    data stored on both sides
+    disks rotate at a constant speed
+    disk controller interfaces between the CPU and the drive
+    disks current about 4 orders of magnitude slower than main memory
+
+disk organisation
+    cylinders: collection of tracks in the same position on the different platters (disks)
+        ie vertical collection of tracks across all the platters
+    track: a circle on a single platter side
+    sector: a section of a track (normally 512B or 4KB)
+    each sector has an equal number of bytes and they're split up like:
+        preamble
+        data
+        error correcting code (ECC)
+    number of sectors on each track increases from the inner side of the disk to the outside of the disk (because the circumference is larger)
+
+cylinder skew
+    the sectors off each track are offset (not aligned) too ensure that the head can move to sectors on different tracks in time when the disk is spinning
+
+access times
+    access time = seek time + rotational delay + transfer time
+    seek time = time need to to move the arm to the right cylinder
+    rotational latency = time before the sector appears under the head (on average, this is half the rotation time)
+    transfer time = time to transfer the data
+    
+queueing times
+    multiple requests may occur at the same time (concurrently)
+        this means that the access time may be increased by a queueing time
+
+seek time
+    Ts = n * m + s
+        where
+            n = number of tracks to be crossed
+            m = crossing time per track
+            s = additional startup delay
+
+Disk scheduling
+    FS must organise files strategically
+    having requests to different disks in the queue will help minimise arm movement
+    every single I/O request will have to go through a syscall (through the OS), which means that the OS can intercept the request and resequence it to minimise arm movement
+    if the drive is free a request may be served immediately, otherwise it will be queued
+
+example queue A: 11 1 36 16 34 9 12
+
+FCFS disk scheduling
+    disk requests simply processed in the order that they come in
+
+Shortest seek time first (SSTF) disk scheduling
+    selects the request that is closest to the current head position to service first
+    example queue A will be processed 50% faster using this algorithm than with FCFS
+    -can result in starvation because arm tends to stay mostly in the middle of the disk (may never get to serve requests which are near the outside of the disk because requests to the centre of the disk are always serviced first)
+
+SCAN disk scheduling
+    lift algorithm (think of an elevator going between floors)
+    keep moving in the same direction until the end is reached
+    service all requests as it passes over them
+    when last cylinder reached, chance direction and services all pending requests it passes like before
+    when first cylinder is reached, change direction again and repeat
+    +starvation cannot occur
+    -middle cylinders are favoured if the disk is heavily used
+    +performs a little bit better than SSTF with queue A
+
+C-SCAN disk scheduling
+    this is basically a circular implementation of a SCAN algorithm
+    once the last cylinder is reached it will reverse direction, but not service any requests on the return journey
+    once it returns to the first cylinder, it will reverse direction again but service all requests it encounters on the way up again
+    +fairer and equalises response times across a disk
+
+Look-SCAN
+    like C-SCAN but instead of returning to the first cylinder to repeat the sweep, it returns to the first request
+    -seeks are cylinder by cylinder and one cylinder contains multiple tracks so the arm may end up "sticking" to one cylinder
+
+N-step-SCAN
+    like the other scans but will service no more than N requests per sweep
+
+SSDs
+    faster because they have no rotational delay or seek time
+    this means SSTF and SCAN (and its variations) may actually reduce performance compared to FCFS

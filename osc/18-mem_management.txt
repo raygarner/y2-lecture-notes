@@ -1,0 +1,105 @@
+page replacement with FIFO
+    linked list with new pages added to the end
+    oldest page (head of list) popped when a page fault occurs
+    +easy to understand and implement
+    -poor performance
+        -heavily used pages are just as likely to be popped as lightly used pages
+
+page replacement with 'second chance FIFO'
+    if page at front of list hasn't been referenced it gets popped
+    reference bit indicates whether it has been referenced
+        if it's set then it has been referenced
+    if the reference bit is set then the page is moved to the back of the list and the reference bit is reset
+    +works better than standard FIFO
+    +relatively simple
+    -costly to implement because the list is constantly changing (pages are added to end of list again
+    -if all the reference bits are the same then it just becomes regular FIFO
+
+page replacement with 'clock replacement algorithm'
+    this is an improvement upon the 'second chance' system
+        the page list is implemented as a circle
+    there's a pointer to the last visited page
+        'one-handed clock' where the hand points to the last visited page
+    +time spent on maintaining the list is reduced
+
+page replacement with 'not recently used (NRU)'
+    maintains 'referenced' and 'modified' bits in the page table
+        referenced bits set to 0 at the start and reset periodically
+    four different page types:
+        class 0: not referenced recently (r0), not modified (m0)
+        class 1: r0, m1
+        class 2: r1, r0
+        class 3: r1, m1
+    page table entries inspected whenever a page fault occurs
+        this could be implemented as a clock:
+            1) find page of class 0 to remove
+            2) if step 1 fails, scan for a page of class 1, resetting the reference bit on each page that is bypassed during the search
+            3) if step 2 fails, rerun step 2 but looking for pages of class 2... then 3 etc
+    +reasonable performance
+    +easy to understand and implement
+
+page replacement with 'least recently used (LRU)'
+    pops the page which has not been used in the longest amount of time
+    OS must track when each page was last used
+    every page table entry has a counter, to track how long the page isn't being used for
+    -costly to run because the list of pages must be kept sorted by the amount of time they were last used
+    can be implemented using a hardware counter that is incremented after each instruction is executed
+
+resident set (pages allocated for one process)
+    small resident sets -> more processes can be stored in memory -> better CPU utilisation
+    small resident sets -> more page faults
+    larger resident sets may no longer reduce page fault rate past a certain point (diminishing returns with increasing the size of the resident sets)
+    the trade off is between the size of the resident sets and the system utilisation
+    resident set size can be fixed or variable (adjusted at runtime)     
+    for variable sized resident sets, replacement policies can be:
+        local: page of the same process replaced
+        global: page taken away from a different process
+    variable sized resident sets often have their size decided based on the working set or page fault frequency
+
+working set
+    the working set W(t,k) is the set of references pages in the last k virtual time units for the process
+        where k = working set window
+              t = virtual time units
+    working set window can be 'memory references' or 'actual process time'
+        set of most recently used pages
+        set of pages used within a time interval
+    working set size can be a guide for the number of frames that should be allocated to a process (the resident set)
+    k = working set window = set of pages used to calculate working set
+        maximum value of k is all of the pages of the process
+    calculating the working set constantly is too costly and unmaintainable
+    the page fault frequency (PFF) can be used to approximate the optimal value for k (optimal number of pages to use in calculating the working set):
+        PFF increases -> (maybe) increase k
+        PFF decreases -> (maybe) decrease k
+
+global resident set replacement policy
+    frames can  be taken from other processes
+    frames allocated dynamically to each process
+    processes can't control their own PFF because it's influenced by other process (when they take frames from each other)
+
+local resident set replacement policy
+    only frames allocated to the current process can be replaced (frames can't be taken from other process to allocate more to this process)
+    every process has a fixed fraction of memory
+
+paging daemon
+    if too few pages are free, this daemon will use a page replacement policy to select pages to pop 
+    this prevents pages being popped when a page fault occurs
+    the daemon will check how many pages are free at a fixed interval
+    the daemon will maintain a list of which pages are free
+    paging daemons often are combined with 'buffering'
+        buffering uses a list of modified pages and will write them to the drive in advance but keep them in main memory
+        if a page has been modified, the copy of it stored on the drive must be updated when it is swapped out
+        when the copy in the drive is fully up to date, the modified bit for the page is reset to 0 (unmodified)
+
+thrashing
+    occurs when pages get swapped out and reloaded again immediately pointlessly
+    you can get caught in a loop of this happening (thrashing can cause more thrashing)
+    thrashing occurs when virtual memory is overused so there is too many page faults, slowing down the system
+
+thrashing feedback loop
+    CPU utilisation too low -> scheduler adds more processes -> frames allocated to new processes and taken from existing ones -> I/O requests queue up due to page faults -> CPU utilisation drops -> scheduler adds more processes
+    solved by:
+        reducing amount of active processes
+        adding more memory
+        using better page replacement policies
+    thrashing can be detected by checking the PFF (thrashing will mean extremely high PFF)
+

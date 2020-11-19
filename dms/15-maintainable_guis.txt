@@ -1,0 +1,15 @@
+MVC (model view controller)
+    controller: keyboard, mouse etc
+    view: GUI/TUI/CLI, screen, speakers etc
+    model: computer software interpreting inputs from the controllers
+    mvc uses observer pattern: 
+        view entities (UI) can subscribe to state change notifications (can be caused by input from the controllers)
+        the model notifies the subscribed views when a model's state changes
+    **remember the minesweeper game from year 1
+
+FXML = FX Markup Language
+    used to describe the layout of a GUI
+    separates the interface design and the main code
+    interface design <---> FXML <---> main code
+
+

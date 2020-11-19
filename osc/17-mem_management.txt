@@ -1,0 +1,71 @@
+
+root page table stored in main memory
+sub-page tables stored in virtual memory because of their size
+
+fetch from main memory takes T nano seconds
+    single page table level: 2*T
+    two page table levels: 3*T
+
+TLBs (translation look aside buffers)
+    found in MMU
+    they cache the most used page table entries
+    can be searched in parallel
+    same principle as any caching
+    
+memory access with TLBs
+    assume single level page table
+    assume 20ns TLB lookup
+    assume 100ns memory access time
+    hit: 20 + 100 = 120ns
+    miss: 20 + 100 + 100 = 220ns
+
+TLB performance eval
+    for 80%
+    120 * 0.8 + 220 * (1 - 0.8) = 140ns
+        hit time * accuracy + miss time * 1 - accuracy
+
+bucket = collection of hash collisions
+    different bits of data that give the same output when put into hash function
+
+inverted page table
+    contains an entry for frames and is indexed by frames (instead of pages)
+    processes will reference items in the list by page number so page number must be converted to frame number
+        done with hashing function
+    +saves space
+    -translation is harder/slower (hash function or searching required)
+        hash function can have collisions
+    TLBs necessary to improve performance
+    used often in 64 bit systems like windows 10
+
+page fault = when a page is needed but it hasnt been loaded from virtual memory into main memory (page not found)
+
+working set = set of pages currently in main memory
+
+virtual memory and pages
+    pages are shuttled between main memory and virtual memory
+
+on demand paging
+    pages are only loaded from virtual memory into main memory when needed
+
+pre paging
+    predicts which pages will be needed and brought into memory all at once when a process is started
+    +reduces page fault rate
+    +reduces transfer times
+
+virtual memory
+    aim to minimise page swapping and unnecessary pages being stored in main memory
+
+optimal page replacement
+    each page labelled with the length of time itll take before it is used again
+    the page with the longest time is the best one to remove
+    this method not always possible to implement
+        used for post-execution analysis
+        provides a lowerbound on number of page faults
+
+FIFO page replacement
+    maintains a linked list with new pages added to end of list
+    oldest page is add the head of the list and is popped when a page fault occurs
+    +easy to understand and implement
+    -poor performance (heavily used pages just as likely to be popped as lightly used pages)
+
+

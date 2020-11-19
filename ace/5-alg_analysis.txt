@@ -1,0 +1,26 @@
+power law: n^k
+exponential: b^n
+
+Theoretical analysis:
+    uses a high level description of the algorithm instead of a proper implementation that can be executed by a computer
+    ie pseudocode
+
+primitive operations
+    basic computations done in an algorithm eg:
+        storing data in a variable
+        comparing 2 numbers
+        adding two numbers
+        calling/returning a function
+        indexing an array
+        fetching a variable from memory
+    assumed to take a constant and consistent amount of time to execute
+    independent from programming language
+    close relation to asm instructions
+
+Random access machine (RAM) model
+    generally 1 cpu
+    generally unlimited bank of memory cells, each of which can hold a number or character
+    memory cells are numbered
+    accessing a memory cell takes a fixed amount of time
+
+

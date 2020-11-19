@@ -1,0 +1,23 @@
+Big-Oh used to classify functions, in a way that is useful for classifying efficiency
+
+s.t. = satisfies the following
+
+f(n) is O(g(n)) <-> exists c, n0 s.t. f(n)<=c g(n) forall n>=n0
+
+Show that f(n)=1 is O(1):
+    pick c, n0 s.t. 1<=c*1 forall n>=n0
+    c=1 n0=1
+    Done.
+
+show that f(n)=2 is O(1):
+    pick c,n0 s.t. 2<=c*1 forall n>=n0
+    c=2 n0=1
+    DONE
+
+show that f(n)=k is O(1) for any fixed constant k:
+    pick c, n0 s.t. k<=c*1
+    c=max(k,1) (yes this is allowed since k is already set as a constant)
+        (the value of c CANNOT depend on n, because it is forall n)
+    n0=1
+
+     
