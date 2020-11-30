@@ -1,0 +1,45 @@
+file access
+    sequential access: block 1-3 must be processed before accessing block 4
+    random access: block 4 can be accessed without 1-3 being processed first
+
+contiguous allocation
+    each file stored in a group of adjacent blocks
+    files stored right next to each other
+    free space allocation done with first first, best fit, next fit etc
+    -external fragmentation occurs when files are removed
+    +simple to implement
+    +optimal read/write performance
+    -size of file (process) not known beforehand so file size can exceed allocated space
+    -allocation algorithms are needed
+    this method is used on CDs and DVDs because data isn't gonna be deleted so there won't be external fragmentation 
+
+linked lists
+    store files across separate blocks
+    each block has a pointer to the next block
+    only first block address is required to find an entire file
+        example of sequential access
+    +easy to maintain (only need to know first block for each file)
+    +file sizes can grow dynamically cus the file size doesn't matter cus new blocks can easily be allocated
+    +no external fragmentation (blocks can just be allocated anywhere, with any size
+    +sequential access is easy to implement
+    -have to traverse the list to find a block in the middle of the list
+    -very minor external fragmentation because half the last block is normally not used
+    -can result in random disk access which is slow due to the movement of the head
+    -space is lost cus each block has to store a pointer too (block size is no longer a power of 2)
+    -if 1 block is lost then the rest of the file cannot be found
+
+file allocation table (FAT)
+    store linked-list pointers in the FAT in memory instead of the blocks on disk
+    +block size remains a power of 2 (no pointers stored in blocks)
+    +FAT can be stored in memory
+    -FAT size grows with the number of blocks
+    -can take up a lot of memory
+
+I-nodes (FAT alternative)
+    each file on disk has an I-node (index-node) containing its attributes and block pointers
+    I-node only loaded when file is open 
+    
+Directories (*NIX)
+    directory table just has pointers to the I-nodes of the files in the dir    dirs are just files themselves so they have their own i-nodes
+
+windows used to use FAT but switched to NTFS with uses i-nodes

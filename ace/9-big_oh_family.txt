@@ -1,0 +1,23 @@
+big-Oh
+big-Omega
+big-Theta
+little-oh
+little-omega
+
+big-Omega definition:
+    same as big-Oh but with 'f(n)>=c*g(n)' instead of 'f(n)<=c*g(n)'
+    reflexive
+    not symmetric
+    transitive
+
+big-Theta
+    like big-Oh but there must be c', c'', n0 such that:
+        f(n)<=c'*g(n) and
+        f(n)>=c''*g(n)
+    reflexive
+    transitive
+    IS symmetric
+    behaves like equality
+
+
+

@@ -1,0 +1,23 @@
+f(n) is O(n)
+but practically it is
+f(n) is O(1)
+
+f is O(g) can be written like: f O g
+
+reflexive:  x R x
+
+symmetric: x R y <-> y R x
+
+transitive: x R y && y R z -> x R z
+
+Big-Oh is reflexive
+
+Big-Oh is not symmetric
+
+Big-Oh is transitive
+
+O(n) can be thought of as a set of functions containing all functions that satisfy 'f is O(n)'
+
+n^O(1) means 'n to the power of a function which is a member of the set O(1)
+
+

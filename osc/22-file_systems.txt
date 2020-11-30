@@ -1,0 +1,66 @@
+sharing files between directories
+    hard links: 2 or more references to same i-node
+    symbolic/soft links: referencer has small file with its own i-node containing the location and name of the file to be shared
+
+hard links
+    +fastest
+    -if i-node deleted then the link will point to NULL
+    -if the i-node gets altered then the link will point to the wrong file
+    if you delete the file, the i-node must be left if its reference count is greater than 0
+
+soft links
+    -extra file lookup (because theres the extra link file)
+    -extra i-node for the link file
+    +no problems with deleting the original file
+    +the linked file can be on a different machine
+
+log structured file system
+    creation of a new file in *NIX
+        allocate, initialise and write i-node for file
+        update and write dir entry for the file
+        write data to disk
+    lots of things can go wrong...
+    corresponding blocks are not necessarily adjacent in disk
+    in linked lists/FAT file systems blocks can be all over the disk
+    log structured system tries to speed up the system with a traditional hard disk by minimising head movement and rotation delay
+    a log is a data structure that is written only at the end
+    log structured file systems buffer r/w operations so they can be carried out in one go together
+    i-node map maintained in memory to find i-nodes easily on the disk
+
+log structured FS: dealing with deleted files
+    cleaner thread running in the background scanning the log circularity and compacting it
+    hard drive treated as a circular buffer
+
+log structured FS: adv/disadv
+    +better performance on write, create and delete
+    +writing is more robust because it is done in 1 big operation
+    -highly incompatibly with existing file systems
+    -cleaner thread takes additional CPU time
+
+journaling FSs
+    delete a file:
+        remove file dir entry
+        add i-node to free i-nodes pool
+        add file's disk blocks to free list
+    can go wrong:
+        directory has already been deleted and crash occurs and i-nodes and disk blocks become inaccessible
+        dir entry and i-nodes have already been released and crash occurs and disk blocks become inaccessible
+
+journaling FS
+    record all events before they take place, execute themn and then remove the record of the event
+    if a crash occurs during executing (eg deleting a file) the entry in the record will remain
+    the record can then be used to restore consistency of the FS if a crash occurs
+    NTFS and EXT3 and EXT4 are journaling file systems
+
+implementations
+    multiple FSs can be on the same computer
+    they can be seamlessly integrated using virtual file systems (VFS)
+
+virtual file systems
+    implemented with polymorphism and OOP
+    you can use an OOP interface to have the same reader type to read from different file types like XML and CSV
+    the VFS is an interface between the user and the actual FS
+    the VFS provides POSIX system calls (open, close, read, write)
+    the user can use the POSIX syscalls without worrying about the actual FS at all
+
+

@@ -1,0 +1,129 @@
+user view = abstraction that the OS provides
+
+implementation view = low level definition
+
+FS = file system
+
+DAG = directed, acyclic graph
+
+user view
+    file abstraction
+    naming policies and file properties
+        size, protection, owner, dates
+    directory structure and organisation
+    syscalls to interact with FS
+
+user view defines how FS will look to regular users
+    it is essentially an abstraction
+
+file types
+    text
+    multimedia
+    directories
+    character special files
+        used to model serial I/O devices
+    block special files
+        used to model hard drives etc
+    regular files = ascii/binary files
+
+windows and *NIX have regular files and directories but *NIX also has the special files to model hardware devices
+
+File control block (FCB)
+    permissions
+    dates (create, access, write)
+    owner, group
+    size
+
+Syscalls
+    elements of the file control block must be edited in kernel mode through syscalls
+    file manipulation syscalls:
+        open(), close(), read(), write() etc
+    directory manipulation:
+        create(), delete(), readdir(), rename(), link(), unlink(), list(), update()
+
+FS structures
+    single level: all files in the same directory (common in consumer electronics)
+    multiple level directories (hierarchical): tree structures
+        absolute path: path from the root of the FS
+        relative path: path from the current working directory (current user home dir)
+    a tree is a DAG where each child can have only 1 parent
+
+DAG and graph representations of FS problems
+    having files 'shared' by directories is implemented by linking files like with pointers
+    using a generic DAG to represent the FS instead of a tree allows for shared files across directories
+    files can have multiple file names if they are shared by directories
+    deleting files can mean you have links pointing to nothing (like NULL pointers)
+    having dead links can mean that inaccessible cycles can exist
+        a garbage collection scheme may be required to clean this inaccessible cycles from the FS
+
+directories
+    implemented as a table which maps human readable file names onto unique IDs and disk locations
+        mapping of the logical file onto the physical location on the drive
+
+directory syscalls
+    create/delete
+    opendir, closedir
+    readdir
+    rename
+    link
+    unlick
+    list
+    update
+
+FS implementation
+    disk partitions, partition tables, boot sectors etc
+    free space management
+    system wide file tables
+    process file tables
+    low level formatting
+        think of sectors on the disk
+    high level formatting
+        think of blocks (which cover multiple sectors)
+
+master boot record (MBR)
+    BIOS reads the MBR when booting
+    contains partition table for the drive
+    one partition of the drive listed as active, containing a boot block to load an OS
+
+UNIX partition structure:
+    boot block
+        code to boot the OS
+        (note every partition has a boot block even if it doesnt contain an OS)
+    super block
+        partition size, number of blocks I-node table size etc
+    free space management
+        bitmap/linked list to indicate the free blocks
+    I-nodes
+        array structures containing info about the files (1 per file)
+    root directory
+        top of the FS
+    data
+        files and dirs
+
+Free space management
+    bitmaps or linked lists
+        (yes, similar to the methods of tracking free memory)
+    bitmaps
+        represent each block with a single bit
+        +take up less space than linked lists
+        -slower to traverse than linked lists
+    linked list
+        store the number of free blocks in the unused blocks of the FS
+        these blocks are linked together so multiple unused blocks store info about the number of free blocks
+        linked lists can keep track of the number of consecutive free blocks (aka counting)
+         
+bitmaps and linked lists in memory
+    bitmaps
+        -require extra space
+        -can only be kept in main mem for small disks
+    linked lists
+        +no wasted disk space
+        +only keep in memory one block of pointers (load a new block when needed)
+
+file tables
+    in-memory mount table: table of different partitions that are mounted
+    in-memory dir cache: recently accessed dir info
+    system-wide open file table: has copies of the FCB for every currently open file in the system
+    per-process open file table: has pointers to the relevant part of the open system-wide open file table 
+
+
