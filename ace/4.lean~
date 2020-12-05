@@ -1,6 +1,0 @@
-variable People : Type
-
-variable Loves : People → People → Prop
-
--- everybody loves somebody
-#check ∀ (x : People), ∃ (y : People), Loves x y

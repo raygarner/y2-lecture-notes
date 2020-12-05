@@ -1,0 +1,91 @@
+Virtualisation
+    multiple OSs running on one set of hardware
+    virtual machine monitor (hypervisor) provides layer of abstraction to make VMs think that theyre running on proper hardware directly
+    a failure in one VM will not bring down any of the others
+    ofc, a failure on the system hosting all the VMs would bring down all the VMs
+    
+virtualisation ideas
+    normal OSs already use virtual memory and FSs
+    the hypervisor will virtualise an entire physical machine(s) for VMs to run on 
+
+virtualisation components
+    hosts = actual physical hardware system
+    hypervisor = abstraction layer providing virtual hardware
+    guest = VM (usually an OS) running on the virtual hardware provided by the hypervisor
+
+virtualisation properties
+    isolation (each VM is separate and independent)
+    encapsulation (VM state can be captured as a file and can be used for snapshots/checkpoints/backups)
+    interposition (all actions must go through the hypervisor which can inspect, modify or deny operations
+    +fewer physical machines saves money of hardware and electricity
+    +you can run legacy applications
+
+virtualisation requirements
+    safety: hypervisor needs full control over virtualised resources
+    fidelity: behaviour of software on guest must be the same as if it were running directly on physical hardware
+    efficiency: much of the code in the guest should run without the hypervisor intervening (checking stuff isnt dangerous)
+
+virtualisation approaches:
+    full virtualisation: trick the guest into thinking it has the whole system
+    para virtualisation: dont try to virtualise a full set of hardware, just provide hypercalls to allow guest to send requests to hypervisor
+    process-level virtualisation: allow a single process written for a different OS to run on this OS (eg Wine in linux)
+
+hypervisor types
+    native: hardware->hypervisor->guest(s)
+    hosted: hardware->OS->hypervisor(s)->guest(s)
+    both types of hypervisors simulate real hardware
+
+native VMs (type 1 hypervisor)
+    hypervisor directly on real hardware
+    only a recent development because CPUs need to provide some virtualisation features directly
+    hypervisor IS the real kernel
+    guests running in user mode
+    this is the preferred architecture for high-end servers
+    para virtualisation is based around this idea 
+    -require virtualisation technology (VT)
+    +fastest virtualisation method
+
+hosted VMs (type 2 hypervisor)
+    installs and runs VMs as programs on an existing OS
+    relies on how the host does scheduling
+    -less fast than type 1 hypervisor
+    -process-level virtualisation needs a type 2 hypervisor (needs a proper OS)
+
+hypervisor virtualisation responsibility
+    privileged instructions (exceptions & interrupts)
+    CPU
+    memory
+    I/O devices
+
+virtualising privileged instructions
+    not safe to run guest kernel in kernel mode of host
+    hence VM needs 2 modes: virtual user mode and virtual kernel mode
+        both of these run in user mode of the host
+    type 1 hypervisors need virtual technology (VT) to allow a guest to run instructions that only work in kernel mode
+    type 2 hypervisors can do this without VT because privileged instructions are emulated
+
+trap and emulate:
+    attempting to execute priviledged instruction in user mode causes error
+    trap error
+    hypervisor takes control and executes the operation for the guest
+    returns control to guest in user mode
+
+virtualising the CPU
+    each guest that is running are time-sliced on the virtual CPU provided by the hypervisor
+    yes, that means the hypervisor only provides one virtual hardware set that all guests share
+
+virtualising memory
+    hypervisor partitions the virtual memory it provides amongst the guests
+        hardware pages are assigned to each of the guests
+        the mappings are controlled to ensure isolation
+    each guest OS will still create and manage their own page tables
+        they are mapped onto the virtual pages provided by the hypervisor by a shadow page table (also provided by the hypervisor)
+
+virtualising I/O
+    guests thinks they own the devices
+    hypervisor recieves the interrupts and exceptions
+    type 1 hypervisors run the drivers directly
+    type 2 hypervisors pass responsibility to the real device driver in the OS
+
+    
+

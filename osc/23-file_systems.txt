@@ -1,0 +1,54 @@
+FS consistency
+    utilities to restore FSs: scandisk (windows), FSCK (*NIX)
+    two main consistency checks:
+        block
+        directory
+
+checking block consistency
+    build 2 tables:
+        count how often block is present in a file
+        count how often block is present in free list
+    if the FS is consistent then there will be a 1 in EITHER (not both) of the tables for each block
+        think XOR:
+        0 0 = not consistent
+        1 0 = consistent
+        1 1 = not consistent
+    -this is a very slow process
+    to fix 0 0 you can simply rebuild the free list with a 1 there
+    to fix 2 (free list) 0 (in use list) you can set 2 to 1 and rebuild free list
+    its practically impossible to fix 0 (free list) 2 (in use list), but you can try:
+        copy content to new free block (file still probably damaged at this point) 
+
+restoring I-node consistency (directory system check)
+    if there is an I-node pointing to a file saying there are 2 things pointing to the file you can't just delete the file since an I-node with a count of one will still exist then, pointing at NULL
+    if the count is 1 but there are actually 2 things pointing at the file you can't delete the file because one of the I-nodes pointing to it will lose the file which it needs
+    to solve these, you pretty much have to recurs through the entire directory hierarchy, checking all the file specific counters and i-node counters making sure they match
+
+FS defragging
+    defragging SSDs is counter-productive: no performance gain and the SSD wears out
+
+EXT FS
+    FS split up into block groups
+    each block group has info:
+        superblock (number of i-nodes, disk blocks etc)
+        group descriptor (bitmap locations, free blocks, i-nodes, dirs)
+        data block and i-node bitmaps
+        i-node table
+        data blocks (contains file and dir blocks)
+
+EXT dir entries
+    each entry has:
+        i-node number
+        entry size
+        type field (file, dir, special file etc)
+        file name length in bytes
+        file name (variable length)
+    dirs are searched linearly (theyre unsorted)
+    cache is maintained for recently accessed items
+    file names up to 255 chars
+
+EXT2 vs EXT3
+    2 had files written ASAP to prevent inconsistency
+        -this means big head movement, hence why EXT2 is more suitable for flash disks (which all have no journal)
+    3 added tree structures for dirs and journaling capability too
+        
