@@ -20,5 +20,11 @@ big-Theta
     behaves like equality
 
 little-Oh
-    
+    like big-Oh but:
+    'for all c > 0' instead of 'there exists c > 0'
+    'f(n) > c*g(n)' instead of 'f(n) >= c*g(n)'
+    note that c does not need to be nat so the formula must hold for c=1,1.1,1.2 etc
+    if f(n) is o(g(n)) then it must be true that f(n) is O(g(n))
+        f(n) is o(g(n)) -> f(n) is O(g(n))
+
 

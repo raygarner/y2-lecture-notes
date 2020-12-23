@@ -1,0 +1,6 @@
+inserting/removing element at head/tail of linked list is O(1)
+    (if you have a pointer to the head and tail and dont need to traverse to the tail of the list)
+
+traversing the list from head to tail is O(n)
+
+

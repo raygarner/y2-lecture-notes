@@ -1,0 +1,20 @@
+Bubble sort
+    outer loop: repeated scans through array
+    inner loop: comparison and swap (if needed) with elements neighbours 
+    O(n^2)
+    just as efficient on a linked list
+
+Selection sort
+    outer loop: iterate backwards through the array
+    inner loop: iterate forwards through the array to to the element reached in the outer array and identify the largest element in that set
+    after the inner loop finishes, move the largest element in the set of searched elements to the end of the set of searched elements by the inner loop
+    O(n^2)
+    same when used on a linked list
+
+Insertion sort
+    outer loop: iterate forwards through the array
+    inner loop: loop backwards from element reached by outer loop until you run out of elements of find an element greater than the element reached by the outer loop
+    after the inner loop is finished, move the element reached by the outer loop to the point reached by the inner loop
+    worse case: O(n^2)
+    best case (array already sorted): O(n)
+    just as good for linked lists (easy to implement for doubly linked lists)

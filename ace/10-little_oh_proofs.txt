@@ -1,0 +1,17 @@
+little oh multiplication:
+    let
+    f(n) is o(g(n))
+    h(n) > 0
+    then
+    h(n) * f(n) is o(h(n) * g(n))
+
+multiplying big oh by little oh:
+    let
+    f1(n) is O(g1(n))
+    f2(n) is o(g2(n))
+    then
+    f1(n) * f2(n) is O(g1(n) * g2(n))
+
+big oh family may be used in context as sets:
+    o(1) = {f(n) | f(n) is o(1) (and f(n) > 0)}
+
