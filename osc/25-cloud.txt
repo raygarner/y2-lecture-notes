@@ -1,0 +1,53 @@
+cloud computing
+    out source computation and storage to a data centre
+    +no worries about power, cooling or maintenance of machines (host handles that)
+    data centres use virtualisation to isolate clients on a single physical machine
+    +data and services accessible from anywhere at anytime
+
+data centre
+    located where electricity is cheap and internet is good
+
+cloud computing caveats
+    host reliability
+    where is the data stored
+    data security
+
+rapid elasticity
+    key challenge in cloud computing
+    easily increase/decrease resources allocated to each client
+    to the client, resources should appear unlimited
+        pay as you go style system for the client
+
+virtualisation
+    if a server needs shutting down, the VMs need to be migrated to a different server
+    non-live migration:
+        pause the VM and save a checkpoint
+        copy over memory pages to new hardware as fast as possible
+    live migration
+    move the VM while it is still operational
+
+Service models
+    infrastructure as a service (IAAS)
+    platform as a service (PAAS)
+    software as a service (SAAS)
+    desktop as a service (DAAD) (new service)
+
+LAAS
+    provides underlying resources to client
+    eg a VM
+
+PAAS
+    tools for software development mainly (IDE, compiler etc)
+
+SAAS
+    an application like gmail, microsoft 365, dropbox, onedrive
+
+cloud deployment models
+    private
+        implemented within internal IT set up of a company
+    public
+        organisation selling cloud services to the public
+    community
+        somewhere between private and public (multiple companies pool money together and share their IT departments)
+    hybrid
+        some public servers, some private servers
